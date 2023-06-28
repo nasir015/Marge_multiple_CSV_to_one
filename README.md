@@ -29,7 +29,6 @@ def combine_multiple_csv_to_one_csv(folder_path,output_folder_path):
 folder_path = 'E:\\Programming_Practice\\final_dataset'
 output_folder_path = 'E:Programming_Practice\\final_dataset\\final_dataset.csv'
 combine_multiple_csv_to_one_csv(folder_path,output_folder_path)
-output_file = '/path/to/output/combined.csv'
-combine_csv_files(folder_path, output_file)
+
 ```
 
