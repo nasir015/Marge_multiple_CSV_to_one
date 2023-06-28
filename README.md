@@ -2,31 +2,33 @@
 
 
 ```python
-import os
+import glob
 import pandas as pd
+import os
 
-def combine_csv_files(folder_path, output_file):
-    # Get all CSV file names in the folder
+
+
+def combine_multiple_csv_to_one_csv(folder_path,output_folder_path):
     file_names = [file for file in os.listdir(folder_path) if file.endswith('.csv')]
+    k = []
+    for file_names in file_names:
+        file_path = os.path.join(folder_path, file_names)
+        k.append(file_path)
 
-    # Initialize an empty DataFrame to store the combined data
-    combined_data = pd.DataFrame()
 
-    # Iterate through each file
-    for file_name in file_names:
-        # Read the CSV file into a DataFrame
-        file_path = os.path.join(folder_path, file_name)
-        data = pd.read_csv(file_path)
+    l = []
+    for file in k:
+        df = pd.read_csv(file, index_col=None, header=0)
+        l.append(df)
 
-        # Append the data to the combined DataFrame
-        combined_data = combined_data.append(data, ignore_index=True)
 
-    # Save the combined data to a new CSV file
-    combined_data.to_csv(output_file, index=False)
-    print(f"Combined CSV files saved to: {output_file}")
+    for i in range(len(l)):
+        pd.DataFrame(l[i]).to_csv(output_folder_path, mode='a', header=False)
 
-# Example usage
-folder_path = '/path/to/csv/folder'
+
+folder_path = 'E:\\Programming_Practice\\final_dataset'
+output_folder_path = 'E:Programming_Practice\\final_dataset\\final_dataset.csv'
+combine_multiple_csv_to_one_csv(folder_path,output_folder_path)
 output_file = '/path/to/output/combined.csv'
 combine_csv_files(folder_path, output_file)
 ```
